@@ -1,0 +1,61 @@
+name: 02 - Test Emotion Recognition Model
+
+on:
+  workflow_run:
+    workflows: ["01 - Train Emotion Recognition Model"]
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10']
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v3
+
+    - name: 🐍 Setup Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: 📥 Download model artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: trained-model
+        path: models/
+
+    - name: 📦 Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-html
+
+    - name: 🧪 Run unit tests
+      run: |
+        pytest tests/ -v --cov=src --cov-report=html --html=report.html
+
+    - name: 📊 Test model accuracy
+      run: |
+        python scripts/validate_model.py --threshold 0.85
+
+    - name: ⚡ Performance testing
+      run: |
+        python scripts/benchmark.py --iterations 100
+
+    - name: 📤 Upload test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-${{ matrix.python-version }}
+        path: |
+          report.html
+          coverage_html_report/
+          benchmark_results.json
+
+    - name: ✅ Check test coverage
+      run: |
+        coverage report --fail-under=80
