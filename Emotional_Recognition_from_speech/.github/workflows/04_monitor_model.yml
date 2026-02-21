@@ -1,0 +1,53 @@
+name: 04 - Monitor Model Performance
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v3
+
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: 📦 Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install prometheus-client
+
+    - name: 📊 Collect metrics
+      run: |
+        python scripts/monitor.py \
+          --api-url ${{ secrets.API_URL }} \
+          --threshold 0.80
+
+    - name: 📈 Generate performance report
+      run: |
+        python scripts/performance_report.py
+
+    - name: 🚨 Check for drift
+      run: |
+        python scripts/drift_detection.py
+
+    - name: 📤 Upload monitoring report
+      uses: actions/upload-artifact@v3
+      with:
+        name: monitoring-report
+        path: reports/monitoring_*.html
+
+    - name: 💬 Send alert if needed
+      if: failure()
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_TITLE: "⚠️ Model Performance Alert"
+        SLACK_MESSAGE: "Model accuracy dropped below threshold!"
+        SLACK_COLOR: danger
