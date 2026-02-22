@@ -1,4 +1,4 @@
-# app/modern_app.py
+# app/modern_app.py - FIXED VERSION
 import os
 import sys
 import numpy as np
@@ -35,7 +35,7 @@ config = Config()
 if not hasattr(config, 'MONO'):
     config.MONO = True
 
-# Load emotion model
+# Load model
 model_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'models', 'emotion_model.h5'))
 scaler_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'models', 'scaler.pkl'))
 
@@ -52,46 +52,26 @@ if os.path.exists(model_path) and os.path.exists(scaler_path):
         extractor = FeatureExtractor(config)
         print("✅ Emotion model loaded successfully")
     except Exception as e:
-        print(f"❌ Error loading emotion model: {e}")
+        print(f"❌ Error loading model: {e}")
 
-# Gender detection function
 def detect_gender(audio, sr=22050):
-    """
-    Detect gender from audio features
-    Returns: 'male', 'female', or 'unknown'
-    """
+    """Detect gender from audio features"""
     try:
-        # Extract pitch-related features
         pitches, magnitudes = librosa.piptrack(y=audio, sr=sr)
         pitches = pitches[pitches > 0]
         
         if len(pitches) == 0:
             return 'unknown'
         
-        # Average pitch (fundamental frequency)
         avg_pitch = np.mean(pitches)
-        
-        # Extract spectral features
-        spectral_rolloff = np.mean(librosa.feature.spectral_rolloff(y=audio, sr=sr))
         spectral_centroid = np.mean(librosa.feature.spectral_centroid(y=audio, sr=sr))
-        
-        # Gender classification logic
-        # Male voices typically: lower pitch (85-180 Hz), lower spectral centroid
-        # Female voices typically: higher pitch (165-255 Hz), higher spectral centroid
         
         if avg_pitch < 165 and spectral_centroid < 2000:
             return 'male'
         elif avg_pitch > 165 and spectral_centroid > 2000:
             return 'female'
         else:
-            # Use additional features for borderline cases
-            zero_crossings = np.mean(librosa.feature.zero_crossing_rate(audio))
-            if avg_pitch < 180 and zero_crossings < 0.05:
-                return 'male'
-            elif avg_pitch > 160 and zero_crossings > 0.03:
-                return 'female'
-            else:
-                return 'unknown'
+            return 'unknown'
     except:
         return 'unknown'
 
@@ -125,9 +105,9 @@ gender_icons = {
 }
 
 gender_colors = {
-    'male': '#3B82F6',  # Blue
-    'female': '#EC4899', # Pink
-    'unknown': '#94A3B8' # Gray
+    'male': '#3B82F6',
+    'female': '#EC4899',
+    'unknown': '#94A3B8'
 }
 
 @app.route('/')
@@ -187,13 +167,6 @@ def predict():
         # Main prediction
         main = all_preds[0]
         
-        # Calculate audio features for display
-        audio_features = {
-            'duration': len(audio) / sr,
-            'sample_rate': sr,
-            'pitch': float(np.mean(librosa.piptrack(y=audio, sr=sr)[0][librosa.piptrack(y=audio, sr=sr)[0] > 0]) or 0)
-        }
-        
         os.remove(temp_path)
         
         return jsonify({
@@ -204,8 +177,7 @@ def predict():
                 'label': gender,
                 'icon': gender_icons[gender],
                 'color': gender_colors[gender]
-            },
-            'audio_features': audio_features
+            }
         })
         
     except Exception as e:
@@ -219,4 +191,5 @@ if __name__ == '__main__':
     print("="*50)
     print(f"📍 URL: http://localhost:5000")
     print("="*50 + "\n")
-    app.run(debug=True, port=5000, host='127.0.0.1')
+    # FIX: Set debug=False or use use_reloader=False
+    app.run(debug=True, port=5000, host='127.0.0.1', use_reloader=False)
