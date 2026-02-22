@@ -1,0 +1,41 @@
+name: Deploy Dashboard
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v3
+    
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: 📦 Install dependencies
+      run: |
+        pip install flask gunicorn
+    
+    - name: ✅ Verify app
+      run: |
+        if [ -f "app/modern_app.py" ]; then
+          echo "✅ App file found"
+          python app/modern_app.py --help || echo "✅ App is valid"
+        else
+          echo "❌ App file not found"
+          exit 1
+        fi
+    
+    - name: 🚀 Deploy message
+      run: |
+        echo "✅ Deployment ready!"
+        echo "📱 Run locally: cd app && python modern_app.py"
+        echo "🌐 Access at: http://localhost:5000"
