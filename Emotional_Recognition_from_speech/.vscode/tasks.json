@@ -1,0 +1,12 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Push to GitHub",
+            "type": "shell",
+            "command": "git add .github/workflows/ && git commit -m 'Update workflows' && git push origin main",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}
