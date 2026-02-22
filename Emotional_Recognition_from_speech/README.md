@@ -2,9 +2,10 @@
 
 A production-ready deep learning system that detects human emotions from speech audio with **85% accuracy**. Built with TensorFlow, Librosa, and Flask, featuring a modern web dashboard and complete CI/CD pipeline.
 
-![Dashboard Demo](screenshots/dashboard.png)
+![Dashboard Demo]
 
----
+d:\Pictures\emotion recognition.jpg
+
 
 Table of Contents
 - [Business Problem](#business-problem)
