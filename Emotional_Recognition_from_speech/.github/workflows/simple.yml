@@ -1,0 +1,22 @@
+name: Simple Test
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Print message
+        run: echo "Hello from GitHub Actions!"
+      
+      - name: Show date
+        run: date
+      
+      - name: List files
+        run: ls -la
