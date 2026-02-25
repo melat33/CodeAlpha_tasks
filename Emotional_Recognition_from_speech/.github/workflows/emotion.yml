@@ -1,0 +1,9 @@
+name: Emotion
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "✅ Emotion workflow running"
+      - run: ls -la
