@@ -1,0 +1,61 @@
+# Core data science
+numpy==1.24.3
+pandas==2.0.3
+scikit-learn==1.3.0
+scipy==1.10.1
+
+# Machine Learning
+xgboost==1.7.6
+imbalanced-learn==0.11.0
+
+# Visualization
+matplotlib==3.7.2
+seaborn==0.12.2
+plotly==5.15.0
+
+# Model Interpretability
+shap==0.41.0
+lime==0.2.0.1
+
+# Web Framework - COMPATIBLE VERSIONS
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.3
+pydantic-core==2.14.6
+python-multipart==0.0.6
+jinja2==3.1.2
+aiofiles==23.2.0
+
+# Database (optional)
+sqlalchemy==2.0.19
+psycopg2-binary==2.9.7
+
+# Testing
+pytest==7.4.0
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1
+requests==2.31.0
+
+# Development
+jupyter==1.0.0
+ipykernel==6.25.0
+black==23.7.0
+flake8==6.1.0
+pre-commit==3.3.3
+
+# Deployment
+gunicorn==21.2.0
+httptools==0.6.0
+
+# Monitoring
+prometheus-client==0.17.1
+opentelemetry-api==1.19.0
+opentelemetry-sdk==1.19.0
+
+# Logging
+python-json-logger==2.0.7
+
+# Utils
+python-dotenv==1.0.0
+joblib==1.3.1
+tqdm==4.65.0
