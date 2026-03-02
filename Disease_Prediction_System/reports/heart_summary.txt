@@ -1,0 +1,32 @@
+
+======================================================================
+              HEART DISEASE PREDICTION - PIPELINE COMPLETE
+======================================================================
+
+  DATASET INFORMATION:
+  --------------------------------------------------
+  Dataset:        Heart Disease
+  Samples:        1,025 patients
+  Features:       13
+
+  BEST MODEL: Random Forest
+  --------------------------------------------------
+  F1-Score:       1.0000
+  Accuracy:       1.0000
+  Precision:      1.0000
+  Recall:         1.0000
+  ROC-AUC:        1.0000
+
+  SAVED FILES:
+  --------------------------------------------------
+  Model:          models/heart_random_forest_v1.0.0.pkl
+  Scaler:         models/heart_scaler.pkl
+  Features:       models/heart_features.pkl
+  Metadata:       models/heart_metadata.json
+  Results:        reports/heart_model_comparison.csv
+  This summary:   reports/heart_summary.txt
+
+  EXECUTION TIME:
+  --------------------------------------------------
+  Completed:      2026-02-25 14:17:49
+======================================================================

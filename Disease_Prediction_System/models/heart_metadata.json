@@ -1,0 +1,31 @@
+{
+  "model_name": "Random Forest",
+  "version": "1.0.0",
+  "training_date": "2026-02-25T14:16:30.621401",
+  "dataset_shape": [
+    1025,
+    14
+  ],
+  "features": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "roc_auc": 1.0
+  }
+}

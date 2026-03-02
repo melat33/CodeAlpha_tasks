@@ -1,0 +1,33 @@
+{
+  "model_name": "SVM",
+  "version": "1.0.0",
+  "training_date": "2026-02-25T13:47:32.373634",
+  "dataset": "Wisconsin Breast Cancer Database",
+  "samples": 569,
+  "features": 30,
+  "feature_list": [
+    "radius_mean",
+    "texture_mean",
+    "perimeter_mean",
+    "area_mean",
+    "smoothness_mean",
+    "compactness_mean",
+    "concavity_mean",
+    "concave points_mean",
+    "symmetry_mean",
+    "fractal_dimension_mean",
+    "..."
+  ],
+  "metrics": {
+    "accuracy": 0.9737,
+    "precision": 1.0,
+    "recall": 0.9286,
+    "f1_score": 0.963,
+    "roc_auc": 0.9947
+  },
+  "preprocessing": {
+    "scaler": "StandardScaler",
+    "test_size": 0.2,
+    "random_state": 42
+  }
+}
