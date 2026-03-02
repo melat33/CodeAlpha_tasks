@@ -1,0 +1,18 @@
+
+======================================================================
+              BREAST CANCER PREDICTION - PIPELINE COMPLETE
+======================================================================
+  Dataset:        Wisconsin Breast Cancer
+  Patients:       569
+  Features:       30
+  Benign cases:   357 (62.7%)
+  Malignant cases: 212 (37.3%)
+  Best Model:     SVM
+  F1-Score:       0.9630
+  Accuracy:       0.9737
+  Precision:      1.0000
+  Recall:         0.9286
+  ROC-AUC:        0.9947
+  Model saved:    models/cancer_svm_v1.0.0.pkl
+  Reports:        reports/cancer_model_comparison.csv
+======================================================================

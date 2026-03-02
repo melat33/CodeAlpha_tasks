@@ -1,0 +1,27 @@
+
+======================================================================
+              DIABETES PREDICTION - PIPELINE COMPLETE
+======================================================================
+  Dataset:        Pima Indians Diabetes
+  Patients:       768
+  Features:       8
+  Diabetes cases: 268 (34.9%)
+  Best Model:     Logistic Regression
+
+  PERFORMANCE METRICS:
+  --------------------------------------------------
+  F1-Score:       0.6610
+  Accuracy:       0.7403
+  Precision:      0.6094
+  Recall:         0.7222
+  ROC-AUC:        0.8222
+
+  SAVED FILES:
+  --------------------------------------------------
+  Model:          models/diabetes_logistic_regression_v1.0.0.pkl
+  Scaler:         models/diabetes_scaler.pkl
+  Features:       models/diabetes_features.pkl
+  Metadata:       models/diabetes_metadata.json
+  Results:        reports/diabetes_model_comparison.csv
+  This summary:   reports/diabetes_summary.txt
+======================================================================
