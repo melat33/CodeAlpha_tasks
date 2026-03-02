@@ -1,0 +1,45 @@
+{
+  "dashboard": {
+    "title": "Disease Prediction System Monitoring",
+    "panels": [
+      {
+        "title": "API Request Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(flask_http_request_duration_seconds_count[5m])",
+            "legendFormat": "{{ route }}"
+          }
+        ]
+      },
+      {
+        "title": "Prediction Accuracy Over Time",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "prediction_accuracy",
+            "legendFormat": "{{ model }}"
+          }
+        ]
+      },
+      {
+        "title": "Active Users",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "sum(active_users)"
+          }
+        ]
+      },
+      {
+        "title": "Model Performance",
+        "type": "table",
+        "targets": [
+          {
+            "expr": "model_performance"
+          }
+        ]
+      }
+    ]
+  }
+}
